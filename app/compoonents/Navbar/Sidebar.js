@@ -1,6 +1,7 @@
 'use client'
 
 import { ChevronFirst, ChevronLast, MoreVertical } from 'lucide-react'
+import Link from 'next/link'
 import { createContext, useContext, useState } from 'react'
 
 const SidebarContext = createContext()
@@ -48,7 +49,7 @@ export default function Sidebar({ children }) {
               <h4 className="font-semibold">John Doe</h4>
               <span className="text-xs text-gray-600">johndoe@gmail.com</span>
             </div>
-            <MoreVertical size={20} className=" cursor-pointer" />
+            <MoreVertical size={20} className="cursor-pointer" />
           </div>
         </div>
       </nav>
@@ -56,48 +57,50 @@ export default function Sidebar({ children }) {
   )
 }
 
-export function SidebarItem({ icon, text, active, alert }) {
+export function SidebarItem({ icon, text, active, alert, URL }) {
   const { expended } = useContext(SidebarContext)
 
   return (
-    <li
-      className={`${
-        text === 'Logout' && 'text-red-800 hover:bg-red-700 hover:text-white'
-      } relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${
-        text !== 'Logout' &&
-        'hover:bg-gradient-to-tr hover:from-indigo-200 hover:to-indigo-100 hover:text-indigo-800'
-      } ${
-        active
-          ? 'bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800'
-          : 'hover:bg-indigo-50 text-gray-600'
-      } `}
-    >
-      {icon}
-      <span
-        className={`overflow-hidden transition-all ${
-          expended ? 'w-52 ml-3' : 'w-0'
-        }`}
+    <Link href={`${URL}`}>
+      <li
+        className={`${
+          text === 'Logout' && 'text-red-800 hover:bg-red-700 hover:text-white'
+        } relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${
+          text !== 'Logout' &&
+          'hover:bg-gradient-to-tr hover:from-indigo-200 hover:to-indigo-100 hover:text-indigo-800'
+        } ${
+          active
+            ? 'bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800'
+            : 'hover:bg-indigo-50 text-gray-600'
+        } `}
       >
-        {text}
-      </span>
-      {alert && (
-        <div
-          className={`absolute right-2 w-2 h-2 rounded bg-indigo-400 ${
-            expended ? '' : 'top-2'
+        {icon}
+        <span
+          className={`overflow-hidden transition-all ${
+            expended ? 'w-52 ml-3' : 'w-0'
           }`}
-        ></div>
-      )}
-      {!expended && (
-        <div
-          className={`absolute left-full rounded-md px-2 py-1 ml-6 ${
-            text !== 'Logout' && 'bg-indigo-100 text-indigo-800'
-          } ${
-            text === 'Logout' && ' bg-red-700 text-white'
-          } text-sm invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}
         >
           {text}
-        </div>
-      )}
-    </li>
+        </span>
+        {alert && (
+          <div
+            className={`absolute right-2 w-2 h-2 rounded bg-indigo-400 ${
+              expended ? '' : 'top-2'
+            }`}
+          ></div>
+        )}
+        {!expended && (
+          <div
+            className={`absolute left-full rounded-md px-2 py-1 ml-6 ${
+              text !== 'Logout' && 'bg-indigo-100 text-indigo-800'
+            } ${
+              text === 'Logout' && ' bg-red-700 text-white'
+            } text-sm invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}
+          >
+            {text}
+          </div>
+        )}
+      </li>
+    </Link>
   )
 }

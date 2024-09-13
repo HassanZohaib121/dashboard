@@ -1,9 +1,7 @@
 import React from 'react'
-
 import BarChartComponent from './BarChartComponent'
 import PieChartComponent from './PieChartComponent'
 import AreaChartComponents from './AreaChartComponents'
-import Navbar from './Navbar/Navbar'
 
 const Header = () => (
   <header className="mb-8">
@@ -22,7 +20,7 @@ const StatCard = ({ title, value, icon }) => (
 
 const Dashboard = () => {
   return (
-    <div className="min-h-screen w-screen bg-gray-100 p-8">
+    <div className="min-h-screen w-[80vw]  bg-gray-100 p-8 ">
       <Header />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <StatCard title="Total Revenue" value="$54,231" icon="💰" />
